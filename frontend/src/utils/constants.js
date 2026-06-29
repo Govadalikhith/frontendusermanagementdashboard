@@ -1,4 +1,4 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/users';
+export const API_BASE_URL = 'https://tacnique-backend-756p.onrender.com/api/users';
 
 export const DEPARTMENTS = [
   'Engineering',

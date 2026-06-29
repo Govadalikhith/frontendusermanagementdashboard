@@ -9,7 +9,7 @@ const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 export const getUsers = async (req, res) => {
   try {
     const { search, department, sortField, sortOrder, page, limit } = req.query;
-    const result = db.getAll({
+    const result = await db.getAll({
       search,
       department,
       sortField,
@@ -28,7 +28,7 @@ export const getUsers = async (req, res) => {
  */
 export const getUserById = async (req, res) => {
   try {
-    const user = db.getById(req.params.id);
+    const user = await db.getById(req.params.id);
     if (!user) {
       return res.status(404).json({ error: 'User not found.' });
     }
@@ -60,7 +60,7 @@ export const createUser = async (req, res) => {
       return res.status(400).json({ errors });
     }
 
-    const newUser = db.create(req.body);
+    const newUser = await db.create(req.body);
     res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ error: 'Server error: Failed to create user.' });
@@ -75,7 +75,7 @@ export const updateUser = async (req, res) => {
     const { firstName, lastName, email, department } = req.body;
     const { id } = req.params;
 
-    const existingUser = db.getById(id);
+    const existingUser = await db.getById(id);
     if (!existingUser) {
       return res.status(404).json({ error: 'User not found.' });
     }
@@ -97,7 +97,7 @@ export const updateUser = async (req, res) => {
       return res.status(400).json({ errors });
     }
 
-    const updated = db.update(id, req.body);
+    const updated = await db.update(id, req.body);
     res.json(updated);
   } catch (error) {
     res.status(500).json({ error: 'Server error: Failed to update user.' });
@@ -109,7 +109,7 @@ export const updateUser = async (req, res) => {
  */
 export const deleteUser = async (req, res) => {
   try {
-    const success = db.delete(req.params.id);
+    const success = await db.delete(req.params.id);
     if (!success) {
       return res.status(404).json({ error: 'User not found.' });
     }

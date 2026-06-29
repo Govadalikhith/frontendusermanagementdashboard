@@ -6,6 +6,15 @@ Rather than making mutations directly to the read-only JSONPlaceholder API (whic
 
 ---
 
+## 🌐 Live Deployment
+
+- **Frontend (Vercel)**: [https://frontendusermanagementdashboard.vercel.app/](https://frontendusermanagementdashboard.vercel.app/)
+- **Backend API (Render)**: [https://tacnique-backend-756p.onrender.com](https://tacnique-backend-756p.onrender.com)
+  - API Health Check: [https://tacnique-backend-756p.onrender.com/health](https://tacnique-backend-756p.onrender.com/health)
+  - Users API: [https://tacnique-backend-756p.onrender.com/api/users](https://tacnique-backend-756p.onrender.com/api/users)
+
+---
+
 ## 🚀 Quick Start & Run Instructions
 
 Ensure you have **Node.js** (version 18+) installed.

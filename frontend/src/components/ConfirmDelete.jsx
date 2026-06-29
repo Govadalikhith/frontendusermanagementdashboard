@@ -4,109 +4,33 @@ export default function ConfirmDelete({ isOpen, onClose, onConfirm, userName, lo
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content delete-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="delete-header">
-          <div className="warning-icon-wrapper">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-[#0f172a] border-l-4 border-brand-error border-y border-r border-white/5 rounded-2xl shadow-2xl w-full max-w-[420px] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center gap-3 p-6 border-b border-white/5 bg-[#060913]/40">
+          <div className="text-brand-error bg-brand-error/10 w-9 h-9 rounded-full flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
               <line x1="12" y1="9" x2="12" y2="13"></line>
               <line x1="12" y1="17" x2="12.01" y2="17"></line>
             </svg>
           </div>
-          <h3>Confirm Delete</h3>
+          <h3 className="text-base font-bold text-slate-200">Confirm Delete</h3>
         </div>
 
-        <div className="delete-body">
-          <p>Are you sure you want to remove <strong className="highlight-delete-name">{userName}</strong> from the organization directory?</p>
-          <p className="danger-notice">This action is permanent and cannot be undone.</p>
+        <div className="p-6 text-slate-400 text-sm leading-relaxed flex flex-col gap-3">
+          <p>Are you sure you want to remove <strong className="text-slate-100 font-semibold">{userName}</strong> from the organization directory?</p>
+          <p className="text-xs text-red-400 font-medium">This action is permanent and cannot be undone.</p>
         </div>
 
-        <div className="delete-actions">
-          <button className="btn btn-secondary" onClick={onClose} disabled={loading}>
+        <div className="flex justify-end gap-3 p-5 border-t border-white/5 bg-[#060913]/40">
+          <button className="bg-white/5 border border-white/5 hover:bg-white/10 text-slate-100 font-semibold py-2 px-4 rounded-xl text-sm transition-all duration-200" onClick={onClose} disabled={loading}>
             Cancel
           </button>
-          <button className="btn btn-danger confirm-delete-btn" onClick={onConfirm} disabled={loading}>
-            {loading ? <div className="spinner"></div> : 'Confirm Delete'}
+          <button className="bg-brand-error hover:bg-red-600 text-white font-semibold py-2 px-5 rounded-xl text-sm shadow-lg hover:shadow-red-600/10 transition-all duration-200 min-w-[140px] flex items-center justify-center" onClick={onConfirm} disabled={loading}>
+            {loading ? <div className="w-5 h-5 border-2 border-white/20 rounded-full border-t-white animate-spin"></div> : 'Confirm Delete'}
           </button>
         </div>
       </div>
-
-      <style>{`
-        .delete-modal {
-          max-width: 420px;
-          border-left: 4px solid var(--error);
-        }
-
-        .delete-header {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 1.5rem;
-          border-bottom: 1px solid var(--border-color);
-          background: rgba(6, 9, 19, 0.4);
-        }
-
-        .warning-icon-wrapper {
-          color: var(--error);
-          background: var(--error-glow);
-          width: 38px;
-          height: 38px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
-        }
-
-        .delete-header h3 {
-          font-size: 1.15rem;
-          color: var(--text-primary);
-        }
-
-        .delete-body {
-          padding: 1.5rem;
-          color: var(--text-secondary);
-          font-size: 0.95rem;
-          line-height: 1.5;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .highlight-delete-name {
-          color: var(--text-primary);
-        }
-
-        .danger-notice {
-          font-size: 0.8rem;
-          color: #f87171;
-          font-weight: 500;
-        }
-
-        .delete-actions {
-          display: flex;
-          justify-content: flex-end;
-          gap: 0.75rem;
-          padding: 1.25rem 1.5rem;
-          border-top: 1px solid var(--border-color);
-          background: rgba(6, 9, 19, 0.4);
-        }
-
-        .confirm-delete-btn {
-          min-width: 140px;
-        }
-
-        /* Form spinner reused */
-        .spinner {
-          width: 18px;
-          height: 18px;
-          border: 2px solid rgba(255,255,255,0.2);
-          border-radius: 50%;
-          border-top-color: #fff;
-          animation: spin 0.8s linear infinite;
-        }
-      `}</style>
     </div>
   );
 }

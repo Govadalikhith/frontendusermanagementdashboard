@@ -6,12 +6,12 @@ export default function UserTable({ users, loading, sortField, sortOrder, onSort
   const renderSortIndicator = (field) => {
     if (sortField !== field) return null;
     return sortOrder === 'asc' ? (
-      <svg className="sort-arrow asc" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <svg className="text-brand-secondary shrink-0 animate-[scaleIn_0.15s_ease]" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <line x1="12" y1="19" x2="12" y2="5"></line>
         <polyline points="5 12 12 5 19 12"></polyline>
       </svg>
     ) : (
-      <svg className="sort-arrow desc" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <svg className="text-brand-secondary shrink-0 animate-[scaleIn_0.15s_ease]" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <line x1="12" y1="5" x2="12" y2="19"></line>
         <polyline points="19 12 12 19 5 12"></polyline>
       </svg>
@@ -19,32 +19,46 @@ export default function UserTable({ users, loading, sortField, sortOrder, onSort
   };
 
   return (
-    <div className="glass-panel table-panel">
-      <div className="table-responsive-wrapper">
-        <table className="user-table">
+    <div className="bg-brand-surface backdrop-blur-md border border-white/5 rounded-2xl shadow-2xl w-full overflow-hidden">
+      <div className="overflow-x-auto w-full">
+        <table className="w-full border-collapse text-left">
           <thead>
             <tr>
-              <th className="sortable-th cell-id" onClick={() => onSort('id')}>
-                <div className="th-content">
+              <th 
+                className="px-6 py-4.5 font-heading text-xs font-bold text-slate-500 uppercase tracking-wider border-b-2 border-white/5 bg-[#060913]/40 select-none cursor-pointer hover:text-slate-200 transition-colors duration-150 hidden md:table-cell" 
+                onClick={() => onSort('id')}
+              >
+                <div className="flex items-center gap-1.5">
                   ID {renderSortIndicator('id')}
                 </div>
               </th>
-              <th className="sortable-th" onClick={() => onSort('firstName')}>
-                <div className="th-content">
+              <th 
+                className="px-6 py-4.5 font-heading text-xs font-bold text-slate-500 uppercase tracking-wider border-b-2 border-white/5 bg-[#060913]/40 select-none cursor-pointer hover:text-slate-200 transition-colors duration-150" 
+                onClick={() => onSort('firstName')}
+              >
+                <div className="flex items-center gap-1.5">
                   Name {renderSortIndicator('firstName')}
                 </div>
               </th>
-              <th className="sortable-th cell-email" onClick={() => onSort('email')}>
-                <div className="th-content">
+              <th 
+                className="px-6 py-4.5 font-heading text-xs font-bold text-slate-500 uppercase tracking-wider border-b-2 border-white/5 bg-[#060913]/40 select-none cursor-pointer hover:text-slate-200 transition-colors duration-150 hidden md:table-cell" 
+                onClick={() => onSort('email')}
+              >
+                <div className="flex items-center gap-1.5">
                   Email {renderSortIndicator('email')}
                 </div>
               </th>
-              <th className="sortable-th" onClick={() => onSort('department')}>
-                <div className="th-content">
+              <th 
+                className="px-6 py-4.5 font-heading text-xs font-bold text-slate-500 uppercase tracking-wider border-b-2 border-white/5 bg-[#060913]/40 select-none cursor-pointer hover:text-slate-200 transition-colors duration-150" 
+                onClick={() => onSort('department')}
+              >
+                <div className="flex items-center gap-1.5">
                   Department {renderSortIndicator('department')}
                 </div>
               </th>
-              <th className="cell-actions-header">Actions</th>
+              <th className="px-6 py-4.5 font-heading text-xs font-bold text-slate-500 uppercase tracking-wider border-b-2 border-white/5 bg-[#060913]/40 select-none text-right pr-10">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -52,14 +66,14 @@ export default function UserTable({ users, loading, sortField, sortOrder, onSort
               <SkeletonLoader rows={5} cols={5} />
             ) : users.length === 0 ? (
               <tr>
-                <td colSpan="5" className="empty-state-cell">
-                  <div className="empty-state-wrapper">
-                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="empty-icon">
+                <td colSpan="5" className="text-center py-20 px-4">
+                  <div className="flex flex-col items-center gap-3 max-w-[320px] mx-auto">
+                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-slate-600">
                       <circle cx="12" cy="12" r="10"></circle>
                       <line x1="8" y1="12" x2="16" y2="12"></line>
                     </svg>
-                    <h4>No Members Found</h4>
-                    <p>No records match your filters or search term.</p>
+                    <h4 className="text-base font-bold text-slate-300">No Members Found</h4>
+                    <p className="text-xs text-slate-500">No records match your active search terms or filters.</p>
                   </div>
                 </td>
               </tr>
@@ -76,102 +90,6 @@ export default function UserTable({ users, loading, sortField, sortOrder, onSort
           </tbody>
         </table>
       </div>
-
-      <style>{`
-        .table-panel {
-          border-radius: var(--radius-lg);
-          overflow: hidden;
-          width: 100%;
-        }
-
-        .table-responsive-wrapper {
-          overflow-x: auto;
-          width: 100%;
-        }
-
-        .user-table {
-          width: 100%;
-          border-collapse: collapse;
-          text-align: left;
-        }
-
-        .user-table th {
-          padding: 1.25rem 1.5rem;
-          font-family: var(--font-heading);
-          font-size: 0.85rem;
-          font-weight: 700;
-          color: var(--text-muted);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          border-bottom: 2px solid var(--border-color);
-          background: rgba(6, 9, 19, 0.4);
-          user-select: none;
-        }
-
-        .sortable-th {
-          cursor: pointer;
-          transition: color var(--transition-fast);
-        }
-
-        .sortable-th:hover {
-          color: var(--text-primary);
-        }
-
-        .th-content {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-        }
-
-        .sort-arrow {
-          color: var(--secondary);
-          animation: scaleIn 0.2s ease;
-        }
-
-        .cell-actions-header {
-          text-align: right;
-          padding-right: 2.5rem !important;
-        }
-
-        .empty-state-cell {
-          text-align: center;
-          padding: 5rem 2rem !important;
-        }
-
-        .empty-state-wrapper {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 0.75rem;
-          max-width: 300px;
-          margin: 0 auto;
-        }
-
-        .empty-icon {
-          color: var(--text-muted);
-          margin-bottom: 0.5rem;
-        }
-
-        .empty-state-wrapper h4 {
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: var(--text-secondary);
-        }
-
-        .empty-state-wrapper p {
-          font-size: 0.85rem;
-          color: var(--text-muted);
-        }
-
-        @media (max-width: 768px) {
-          .cell-email {
-            display: none;
-          }
-          .cell-id {
-            display: none;
-          }
-        }
-      `}</style>
     </div>
   );
 }

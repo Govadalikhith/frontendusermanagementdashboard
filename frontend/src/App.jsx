@@ -134,12 +134,12 @@ export default function App() {
   const userNameToDelete = userToDelete ? `${userToDelete.firstName} ${userToDelete.lastName}` : '';
 
   return (
-    <div className="app-container">
+    <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col gap-6 animate-[fadeIn_0.5s_ease]">
       {/* 1. Header Branding & Global Stats */}
       <Header totalUsers={totalCount} onAddClick={handleAddClick} />
 
       {/* 2. Controls Area (Search bar and Filters trigger button) */}
-      <div className="controls-panel glass-panel">
+      <div className="p-5 bg-brand-surface backdrop-blur-md border border-white/5 rounded-2xl shadow-2xl">
         <SearchBar
           search={search}
           onSearchChange={setSearch}
@@ -201,13 +201,6 @@ export default function App() {
         type={toast.type}
         onClose={clearToast}
       />
-
-      <style>{`
-        .controls-panel {
-          padding: 1.25rem 1.5rem;
-          border-radius: var(--radius-lg);
-        }
-      `}</style>
     </div>
   );
 }
